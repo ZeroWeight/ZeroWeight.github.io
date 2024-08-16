@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="https://web.cs.ucla.edu/~weightzero/feed.xml" rel="self" type="application/atom+xml" /><link href="https://web.cs.ucla.edu/~weightzero/" rel="alternate" type="text/html" /><updated>2024-08-16T11:35:15-07:00</updated><id>https://web.cs.ucla.edu/~weightzero/feed.xml</id><title type="html">Weitong Zhang</title><subtitle>Weitong's personal homepage</subtitle><author><name>Weitong Zhang</name><email>weitongz [at] unc [dot] edu</email></author><entry><title type="html">Traveling in United States</title><link href="https://web.cs.ucla.edu/~weightzero/posts/travel-US/" rel="alternate" type="text/html" title="Traveling in United States" /><published>2022-01-02T00:00:00-08:00</published><updated>2022-01-02T00:00:00-08:00</updated><id>https://web.cs.ucla.edu/~weightzero/posts/travel-us</id><content type="html" xml:base="https://web.cs.ucla.edu/~weightzero/posts/travel-US/">&lt;p&gt;Traveling in United States, and not including the ‘connection airports’ such like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IAH&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ORD&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;===&lt;/p&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css&quot; integrity=&quot;sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm&quot; crossorigin=&quot;anonymous&quot; /&gt;
+
+&lt;script src=&quot;https://code.jquery.com/jquery-3.2.1.slim.min.js&quot; integrity=&quot;sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js&quot; integrity=&quot;sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js&quot; integrity=&quot;sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://www.gstatic.com/charts/loader.js&quot;&gt;&lt;/script&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+	google.charts.load('current', {
+		'packages':['geochart'],
+	});
+	google.charts.setOnLoadCallback(drawRegionsMap);
+
+	function drawRegionsMap() {
+
+		var discovered = [
+			'2012 Visition with family',
+			'2015 Visition with family',
+			'2021 Cross US trip with Fan',
+			'2023 Group retreat with Prof. Liu\'s lab',
+   			'2023 NeurIPS conference',
+			'2024 UNC'
+		]
+
+        var data = google.visualization.arrayToDataTable([
+          ['States', ''],
+		  ['US-NJ', 1], ['US-NY', 1], ['US-MA', 1], ['US-CT', 1], ['US-PA', 1], ['US-MD', 1], ['US-DC', 1],
+          ['US-CA', 2], ['US-NV', 2], ['US-UT', 2], ['US-ID', 2], ['US-WY', 2], ['US-IL', 2], ['US-DE', 2],
+		  ['US-CO', 3], ['US-KS', 3], ['US-MO', 3], ['US-IN', 3], ['US-OH', 3], ['US-WV', 3], ['US-VA', 3], ['US-AZ', 3],
+		  ['US-HI', 4],
+    	  ['US-LA', 5],
+		  ['US-NC', 6],
+        ]);
+
+		var view = new google.visualization.DataView(data);
+		view.setColumns([0, {
+    		type: 'number',
+    		label: '',
+    		calc: function (dataTable, rowIndex) {
+      			return {
+        			v: data.getValue(rowIndex, 1),
+        			f: discovered[data.getValue(rowIndex, 1) - 1],
+      			}
+			}
+  		}])
+
+		var options = {
+			region: 'US',
+			displayMode: 'regions',
+			resolution: 'provinces',
+			tooltip: {showColorCode: false, isHTML: true},
+			legend: 'none',
+    		colorAxis: {colors: ['#e7711c', '#4374e0']}
+		};	
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(view, options);
+      }
+&lt;/script&gt;
+
+&lt;div id=&quot;regions_div&quot; style=&quot;aspect-ratio: 16 / 9;&quot; class=&quot;col-12 col-md-9&quot;&gt;&lt;/div&gt;</content><author><name>Weitong Zhang</name><email>weitongz [at] unc [dot] edu</email></author><category term="travel" /><summary type="html">Traveling in United States, and not including the ‘connection airports’ such like IAH or ORD.</summary></entry><entry><title type="html">How to deploy this website?</title><link href="https://web.cs.ucla.edu/~weightzero/posts/deploy-this-website/" rel="alternate" type="text/html" title="How to deploy this website?" /><published>2022-01-01T00:00:00-08:00</published><updated>2022-01-01T00:00:00-08:00</updated><id>https://web.cs.ucla.edu/~weightzero/posts/hello</id><content type="html" xml:base="https://web.cs.ucla.edu/~weightzero/posts/deploy-this-website/">&lt;h2 id=&quot;jekyll-scholar&quot;&gt;Jekyll-scholar&lt;/h2&gt;
+
+&lt;p&gt;I use Jekyll-scholar to maintain my publications. So everytime I’d like to update my publications, I export from google scholar as the bib file, put it to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;publications.bib&lt;/code&gt; in my CV. Then in the GitHub Actions, I use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat CV/papers.bib &amp;gt;&amp;gt; _bibliography/references.bib&lt;/code&gt;. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_bibliography/references.bib&lt;/code&gt; originally has the Jekyll header:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
+---
+References
+==========
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And in the publication pages, I only need&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-[markdown]&quot;&gt;---
+layout: archive
+title: &quot;Publications&quot;
+permalink: /publications/
+author_profile: true
+---
+
+  You can also find my recent publications on &amp;lt;u&amp;gt;&amp;lt;a href=&quot;https://scholar.google.com/citations?user=Ec6bzmcAAAAJ&quot;&amp;gt;my Google Scholar profile&amp;lt;/a&amp;gt;.&amp;lt;/u&amp;gt;
+
+
+&amp;lt;!--  --&amp;gt;
+&amp;lt;p&amp;gt; &amp;lt;sup&amp;gt;*&amp;lt;/sup&amp;gt; means Equal Contirbution.&amp;lt;/p&amp;gt;
+
+&amp;lt;ol class=&quot;bibliography&quot;&amp;gt;&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;zhang2024uncertainty&quot;&amp;gt;Zhang, J., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Zhou, D., &amp;amp;amp; Gu, Q. (2024). Uncertainty-Aware Reward-Free Exploration with General Function Approximation. &amp;lt;i&amp;gt;ArXiv Preprint ArXiv:2406.16255&amp;lt;/i&amp;gt;.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;sun2024appropriate&quot;&amp;gt;Sun, J., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Chen, Y., Hoar, B., Sheng, H., Yang, J., Costentin, C., Gu, Q., &amp;amp;amp; Liu, C. (2024). &amp;lt;i&amp;gt;What is the appropriate data representation of electrochemical impedance spectroscopy in machine-learning analysis?&amp;lt;/i&amp;gt;&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;zhang2024settling&quot;&amp;gt;&amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Fan, Z., He, J., &amp;amp;amp; Gu, Q. (2024). Settling Constant Regrets in Linear Markov Decision Processes. &amp;lt;i&amp;gt;ArXiv Preprint ArXiv:2404.10745&amp;lt;/i&amp;gt;.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;zhao2024mitigating&quot;&amp;gt;Zhao, L., Deng, Y., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, &amp;amp;amp; Gu, Q. (2024). Mitigating Object Hallucination in Large Vision-Language Models via Classifier-Free Guidance. &amp;lt;i&amp;gt;ArXiv Preprint ArXiv:2402.08680&amp;lt;/i&amp;gt;.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;sheng2024autonomous&quot;&amp;gt;Sheng, H., Sun, J., Rodrı́guez Oliver, Hoar, B. B., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Xiang, D., Tang, T., Hazra, A., Min, D. S., Doyle, A. G., &amp;amp;amp; others. (2024). Autonomous closed-loop mechanistic investigation of molecular electrochemistry via automation. &amp;lt;i&amp;gt;Nature Communications&amp;lt;/i&amp;gt;, &amp;lt;i&amp;gt;15&amp;lt;/i&amp;gt;(1), 2781.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;lopez2024challenges&quot;&amp;gt;Lopez, V. K., Cramer, E. Y., Pagano, R., Drake, J. M., O’Dea, E. B., Adee, M., Ayer, T., Chhatwal, J., Dalgic, O. O., Ladd, M. A., &amp;amp;amp; others. (2024). Challenges of COVID-19 Case Forecasting in the US, 2020–2021. &amp;lt;i&amp;gt;PLoS Computational Biology&amp;lt;/i&amp;gt;, &amp;lt;i&amp;gt;20&amp;lt;/i&amp;gt;(5), e1011200.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;deng2023rephrase&quot;&amp;gt;Deng, Y., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Chen, Z., &amp;amp;amp; Gu, Q. (2023). Rephrase and respond: Let large language models ask better questions for themselves. &amp;lt;i&amp;gt;ArXiv Preprint ArXiv:2311.04205&amp;lt;/i&amp;gt;.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;hoar2023object&quot;&amp;gt;Hoar, B., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Chen, Y., Sun, J., Sheng, H., Zhang, Y., Yang, J., Costentin, C., Gu, Q., &amp;amp;amp; Liu, C. (2023). &amp;lt;i&amp;gt;Object-detecting deep learning for mechanism discernment in multi-redox cyclic voltammograms&amp;lt;/i&amp;gt;.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;zhang2023moleculegpt&quot;&amp;gt;&amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Wang, X., Nie, W., Eaton, J., Rees, B., &amp;amp;amp; Gu, Q. (2023). MoleculeGPT: Instruction Following Large Language Models for Molecular Property Prediction. &amp;lt;i&amp;gt;NeurIPS 2023 Workshop on New Frontiers of AI for Drug Discovery and Development&amp;lt;/i&amp;gt;.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;zhang2023interplay&quot;&amp;gt;&amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, He, J., Fan, Z., &amp;amp;amp; Gu, Q. (2023). On the interplay between misspecification and sub-optimality gap in linear contextual bandits. &amp;lt;i&amp;gt;International Conference on Machine Learning&amp;lt;/i&amp;gt;, 41111–41132.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;zhang2023optimal&quot;&amp;gt;Zhang, J., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, &amp;amp;amp; Gu, Q. (2023). Optimal horizon-free reward-free exploration for linear mixture mdps. &amp;lt;i&amp;gt;International Conference on Machine Learning&amp;lt;/i&amp;gt;, 41902–41930.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;shea2023multiple&quot;&amp;gt;Shea, K., Borchering, R. K., Probert, W. J. M., Howerton, E., Bogich, T. L., Li, S.-L., van Panhuis, W. G., Viboud, C., Aguás, R., Belov, A. A., &amp;amp;amp; others. (2023). Multiple models for outbreak decision support in the face of uncertainty. &amp;lt;i&amp;gt;Proceedings of the National Academy of Sciences&amp;lt;/i&amp;gt;, &amp;lt;i&amp;gt;120&amp;lt;/i&amp;gt;(18), e2207537120.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;zhang2023diffmol&quot;&amp;gt;&amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Wang, X., Smith, J., Eaton, J., Rees, B., &amp;amp;amp; Gu, Q. (2023). Diffmol: 3d structured molecule generation with discrete denoising diffusion probabilistic models. &amp;lt;i&amp;gt;ICML 2023 Workshop on Structured Probabilistic Inference {\Backslash&amp;amp;} Generative Modeling&amp;lt;/i&amp;gt;.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;huang2023causal&quot;&amp;gt;Huang, Z., Hwang, J., Zhang, J., Baik, J., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Wodarz, D., Sun, Y., Gu, Q., &amp;amp;amp; Wang, W. (2023). Causal Graph ODE: Continuous Treatment Effect Modeling in Multi-agent Dynamical Systems. &amp;lt;i&amp;gt;The Symbiosis of Deep Learning and Differential Equations III&amp;lt;/i&amp;gt;.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;zhang2023provably&quot;&amp;gt;&amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, He, J., Zhou, D., Gu, Q., &amp;amp;amp; Zhang, A. (2023). Provably efficient representation selection in low-rank Markov decision processes: from online to offline RL. &amp;lt;i&amp;gt;Uncertainty in Artificial Intelligence&amp;lt;/i&amp;gt;, 2488–2497.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;ji2023horizon&quot;&amp;gt;Ji, K., Zhao, Q., He, J., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, &amp;amp;amp; Gu, Q. (2023). Horizon-free Reinforcement Learning in Adversarial Linear Mixture MDPs. &amp;lt;i&amp;gt;The Twelfth International Conference on Learning Representations&amp;lt;/i&amp;gt;.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;hoar2022electrochemical&quot;&amp;gt;Hoar, B. B., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Xu, S., Deeba, R., Costentin, C., Gu, Q., &amp;amp;amp; Liu, C. (2022). Electrochemical mechanistic analysis from cyclic voltammograms based on deep learning. &amp;lt;i&amp;gt;ACS Measurement Science Au&amp;lt;/i&amp;gt;, &amp;lt;i&amp;gt;2&amp;lt;/i&amp;gt;(6), 595–604.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;cramer2022evaluation&quot;&amp;gt;Cramer, E. Y., Ray, E. L., Lopez, V. K., Bracher, J., Brennen, A., Castro Rivadeneira, A. J., Gerding, A., Gneiting, T., House, K. H., Huang, Y., &amp;amp;amp; others. (2022). Evaluation of individual and ensemble probabilistic forecasts of COVID-19 mortality in the United States. &amp;lt;i&amp;gt;Proceedings of the National Academy of Sciences&amp;lt;/i&amp;gt;, &amp;lt;i&amp;gt;119&amp;lt;/i&amp;gt;(15), e2113561119.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;jia2021learning&quot;&amp;gt;Jia, Y., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Zhou, D., Gu, Q., &amp;amp;amp; Wang, H. (2021). Learning Neural Contextual Bandits through Perturbed Rewards. &amp;lt;i&amp;gt;International Conference on Learning Representations&amp;lt;/i&amp;gt;.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;zhang2021reward&quot;&amp;gt;&amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Zhou, D., &amp;amp;amp; Gu, Q. (2021). Reward-free model-based reinforcement learning with linear function approximation. &amp;lt;i&amp;gt;Advances in Neural Information Processing Systems&amp;lt;/i&amp;gt;, &amp;lt;i&amp;gt;34&amp;lt;/i&amp;gt;, 1582–1593.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;bracher2021pre&quot;&amp;gt;Bracher, J., Wolffram, D., Deuschel, J., Görgen, K., Ketterer, J. L., Ullrich, A., Abbott, S., Barbarossa, M. V., Bertsimas, D., Bhatia, S., &amp;amp;amp; others. (2021). A pre-registered short-term forecasting study of COVID-19 in Germany and Poland during the second wave. &amp;lt;i&amp;gt;Nature Communications&amp;lt;/i&amp;gt;, &amp;lt;i&amp;gt;12&amp;lt;/i&amp;gt;(1), 5173.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;zhang2020neural&quot;&amp;gt;&amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Zhou, D., Li, L., &amp;amp;amp; Gu, Q. (2020). Neural Thompson Sampling. &amp;lt;i&amp;gt;International Conference on Learning Representations&amp;lt;/i&amp;gt;.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;ray2020ensemble&quot;&amp;gt;Ray, E. L., Wattanachit, N., Niemi, J., Kanji, A. H., House, K., Cramer, E. Y., Bracher, J., Zheng, A., Yamana, T. K., Xiong, X., &amp;amp;amp; others. (2020). Ensemble forecasts of coronavirus disease 2019 (COVID-19) in the US. &amp;lt;i&amp;gt;MedRXiv&amp;lt;/i&amp;gt;, 2020–2008.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;zou2020epidemic&quot;&amp;gt;Zou, D., Wang, L., Xu, P., Chen, J., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, &amp;amp;amp; Gu, Q. (2020). Epidemic model guided machine learning for COVID-19 forecasts in the United States. &amp;lt;i&amp;gt;MedRxiv&amp;lt;/i&amp;gt;, 2020–2005.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;wu2020finite&quot;&amp;gt;Wu, Y. F., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Xu, P., &amp;amp;amp; Gu, Q. (2020). A finite-time analysis of two time-scale actor-critic methods. &amp;lt;i&amp;gt;Advances in Neural Information Processing Systems&amp;lt;/i&amp;gt;, &amp;lt;i&amp;gt;33&amp;lt;/i&amp;gt;, 17617–17628.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;!-- Change all equal contribution --&amp;gt;
+
+&amp;lt;span id=&quot;liu2018simulation&quot;&amp;gt;Liu, S., &amp;lt;strong&amp;gt;Zhang, W.&amp;lt;/strong&amp;gt;, Wu, X., Feng, S., Pei, X., &amp;amp;amp; Yao, D. (2018). A simulation system and speed guidance algorithms for intersection traffic control using connected vehicle technology. &amp;lt;i&amp;gt;Tsinghua Science and Technology&amp;lt;/i&amp;gt;, &amp;lt;i&amp;gt;24&amp;lt;/i&amp;gt;(2), 160–170.&amp;lt;/span&amp;gt;
+
+&amp;lt;/li&amp;gt;&amp;lt;/ol&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;toolchain-in-2024&quot;&gt;Toolchain in 2024&lt;/h2&gt;
+&lt;p&gt;I use GitHub Actions to deploy this webpage directly to my local server, eliminating the need to compile locally. Now, we can simultaneously update the CV and homepage using Jekyll.&lt;/p&gt;
+
+&lt;p&gt;Something interesting here is Overleaf has the connection with Github, so if I’d like to make some changes on the CV, I can only update the Overleaf project and then push to github. It will call the latex docker to complie it.&lt;/p&gt;
+
+&lt;p&gt;Below are the GitHub Actions I use&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-[yaml]&quot;&gt;name: Build and Deploy Jekyll Site
+
+on:
+  push:
+    branches:
+      - master  # Set your default branch here
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Prepare deployment directory
+      run: |
+        mkdir www _site
+        cat CV/papers.bib &amp;gt;&amp;gt; _bibliography/references.bib
+
+    - name: Build site
+      uses: docker://jekyll/jekyll:3
+      with:
+        args: &quot;jekyll build&quot;
+
+    - name: Compile LaTeX document for resume
+      uses: xu-cheng/latex-action@master
+      with:
+        working_directory: CV/
+        root_file: main.tex
+        args: -xelatex -file-line-error -interaction=nonstopmode
+    
+
+    - name: Copy site to www
+      run: |
+        cp -r _site/* www/
+        cp -r assets/* www/assets/
+        cp -r files/* www/files/
+        cp -r images/* www/images/
+        cp CV/main.pdf www/files/cv.pdf
+
+    # This step also requires SSH keys to be set up in the secrets.
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@5.2.1
+      with:
+        switches: -avzr --delete
+        path: ./www/
+        remote_path: ~/www/
+        remote_host: $
+        remote_user: $
+        remote_key: $
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;toolchain-in-2022&quot;&gt;Toolchain in 2022&lt;/h2&gt;
+
+&lt;p&gt;I don’t have admin privileges on the department server, so installing Ruby or Docker on that server without the admins’ permission could create complications. Instead, I compile the HTML files on my own machine and then transfer them to the department server. I store the HTML files in the www/ folder. Below is the script I use for this process:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-[shell]&quot;&gt;rm -rf www/
+docker run --rm --volume=&quot;$PWD:/srv/jekyll:Z&quot; -it jekyll/jekyll jekyll clean
+docker run --rm --volume=&quot;$PWD:/srv/jekyll:Z&quot; -it jekyll/jekyll jekyll build
+mkdir www/
+cp -r _site/* www/
+cp -r assets/* www/assets/
+cp -r files/* www/files/
+cp -r images/* www/images/
+rsync -azi --delete ./www/ USRNAME@SERVER:~/www/
+&lt;/code&gt;&lt;/pre&gt;</content><author><name>Weitong Zhang</name><email>weitongz [at] unc [dot] edu</email></author><category term="tech" /><summary type="html">Jekyll-scholar</summary></entry></feed>

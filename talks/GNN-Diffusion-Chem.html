@@ -1,0 +1,950 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Introduction to Graph Neural Networks and Diffusion Models - Weitong Zhang</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="Weitong Zhang">
+<meta property="og:title" content="Introduction to Graph Neural Networks and Diffusion Models">
+
+
+  <link rel="canonical" href="https://web.cs.ucla.edu/~weightzero/talks/GNN-Diffusion-Chem">
+  <meta property="og:url" content="https://web.cs.ucla.edu/~weightzero/talks/GNN-Diffusion-Chem">
+
+
+
+  <meta property="og:description" content="Introduction to Graph Neural Networks and Diffusion Models">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2024-06-07T00:00:00-07:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Weitong Zhang",
+      "url" : "https://web.cs.ucla.edu/~weightzero",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://web.cs.ucla.edu/~weightzero/feed.xml" type="application/atom+xml" rel="alternate" title="Weitong Zhang Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://web.cs.ucla.edu/~weightzero/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+    
+
+<!-- start custom head snippets -->
+
+<!-- <link rel="apple-touch-icon" sizes="57x57" href="https://web.cs.ucla.edu/~weightzero/images/apple-touch-icon-57x57.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="60x60" href="https://web.cs.ucla.edu/~weightzero/images/apple-touch-icon-60x60.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="72x72" href="https://web.cs.ucla.edu/~weightzero/images/apple-touch-icon-72x72.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="76x76" href="https://web.cs.ucla.edu/~weightzero/images/apple-touch-icon-76x76.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="114x114" href="https://web.cs.ucla.edu/~weightzero/images/apple-touch-icon-114x114.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="120x120" href="https://web.cs.ucla.edu/~weightzero/images/apple-touch-icon-120x120.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="144x144" href="https://web.cs.ucla.edu/~weightzero/images/apple-touch-icon-144x144.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="152x152" href="https://web.cs.ucla.edu/~weightzero/images/apple-touch-icon-152x152.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="180x180" href="https://web.cs.ucla.edu/~weightzero/images/apple-touch-icon-180x180.png?v=M44lzPylqQ">
+<link rel="icon" type="image/png" href="https://web.cs.ucla.edu/~weightzero/images/favicon-32x32.png?v=M44lzPylqQ" sizes="32x32">
+<link rel="icon" type="image/png" href="https://web.cs.ucla.edu/~weightzero/images/android-chrome-192x192.png?v=M44lzPylqQ" sizes="192x192">
+<link rel="icon" type="image/png" href="https://web.cs.ucla.edu/~weightzero/images/favicon-96x96.png?v=M44lzPylqQ" sizes="96x96">
+<link rel="icon" type="image/png" href="https://web.cs.ucla.edu/~weightzero/images/favicon-16x16.png?v=M44lzPylqQ" sizes="16x16"> -->
+<link rel="manifest" href="https://web.cs.ucla.edu/~weightzero/images/manifest.json?v=M44lzPylqQ">
+<!-- <link rel="mask-icon" href="https://web.cs.ucla.edu/~weightzero/images/safari-pinned-tab.svg?v=M44lzPylqQ" color="#000000"> -->
+<!-- <link rel="shortcut icon" href="/images/favicon.ico?v=M44lzPylqQ"> -->
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="msapplication-TileImage" content="https://web.cs.ucla.edu/~weightzero/images/mstile-144x144.png?v=M44lzPylqQ">
+<meta name="msapplication-config" content="https://web.cs.ucla.edu/~weightzero/images/browserconfig.xml?v=M44lzPylqQ">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="https://web.cs.ucla.edu/~weightzero/assets/css/academicons.css"/>
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="https://web.cs.ucla.edu/~weightzero/">Weitong Zhang</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://web.cs.ucla.edu/~weightzero/publications/">Publications</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://web.cs.ucla.edu/~weightzero/talks/">Talks</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://web.cs.ucla.edu/~weightzero/teaching/">Teaching</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://web.cs.ucla.edu/~weightzero/year-archive/">Blog Posts</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://web.cs.ucla.edu/~weightzero/cv/">CV</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="https://web.cs.ucla.edu/~weightzero/images/profile.jpg" class="author__avatar" alt="Weitong Zhang">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Weitong Zhang</h3>
+    <p class="author__bio">Assistant Professor, School of Data Science and Society</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> Office 4401, ITS Manning</li>
+      
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> UNC, Chapel Hill</li>
+      
+      
+      
+        <li><a href="mailto:weitongz [at] unc [dot] edu"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> Email</a></li>
+      
+      
+       
+      
+        <li><a href="https://twitter.com/WeitongZhang"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+      
+        <li><a href="https://www.linkedin.com/in/weitong-zhang-382671221"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/ZeroWeight"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://scholar.google.com/citations?user=Ec6bzmcAAAAJ"><i class="fas fa-fw fa-graduation-cap"></i> Google Scholar</a></li>
+      
+      
+      
+        <li><a href="https://orcid.org/0000-0003-4731-9986"><i class="ai ai-orcid-square ai-fw"></i> ORCID</a></li>
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introduction to Graph Neural Networks and Diffusion Models">
+    <meta itemprop="description" content="Introduction to Graph Neural Networks and Diffusion Models">
+    <meta itemprop="datePublished" content="June 07, 2024">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Introduction to Graph Neural Networks and Diffusion Models
+</h1>
+          
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i>Date:</strong> <time datetime="2024-06-07T00:00:00-07:00">June 07, 2024</time></p>
+        
+        
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <h1 id="introduction-to-graph-neural-networks-and-diffusion-models">Introduction to Graph Neural Networks and Diffusion Models</h1>
+
+<blockquote>
+  <p>Prepared for Chong’s Lab on June 10th, 2024</p>
+
+  <p>Powered  <a href="https://marp.app">Marp</a> for updating the slides and webiste together.</p>
+</blockquote>
+
+<hr />
+
+<h1 id="graph-neural-networks">Graph Neural Networks</h1>
+
+<ul>
+  <li>Unstructured data: $x \mapsto f_{\theta}(x)$, e.g., $f_{\theta}(x) = \theta^\top x$
+    <ul>
+      <li>e.g. Image: $x \in \mathbb R^{256 \times 256 (\times 3)}$; CV data: $x \in \mathbb R^{3 \times T \times N}$</li>
+    </ul>
+  </li>
+  <li>Structured data?</li>
+</ul>
+
+<p><img src="https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2022/01/04/ML-6681-image001.png" alt="h:325" /><img src="https://cdn.britannica.com/28/105428-050-8EA3E600/Caffeine-molecule.jpg" alt="h:325" /></p>
+
+<blockquote>
+  <p>cr. <a href="https://cdn.britannica.com/28/105428-050-8EA3E600/Caffeine-molecule.jpg"><em>Img.1</em></a>, <a href="https://cdn.britannica.com/28/105428-050-8EA3E600/Caffeine-molecule.jpg"><em>Img.2</em></a></p>
+</blockquote>
+
+<hr />
+<h2 id="basic-graph-structure">Basic Graph Structure</h2>
+<p><img src="https://cdn.britannica.com/28/105428-050-8EA3E600/Caffeine-molecule.jpg" alt="bg left:40% 100%" /></p>
+
+<ul>
+  <li>$\mathcal G = {\mathcal V, \mathcal E}$</li>
+  <li>$\mathcal V$: nodes, vertexes, e.g., atom / users
+    <ul>
+      <li>$\mathcal V = {x_i}_n$: atom / user features</li>
+    </ul>
+  </li>
+  <li>$\mathcal E$: edges, e.g., bonds, social relationship
+    <ul>
+      <li>$\mathcal E = {e_{ij}}_{n \times n}$: bond types, etc.</li>
+      <li>$e_{ij}$ vs. $e_{ji}$: undirectional / directional
+        <blockquote>
+          <p>$N$: number of nodes in the graph
+$i$: node indices</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h2 id="graph-structure-example-1">Graph structure (example 1)</h2>
+<p><img src="https://qph.cf2.quoracdn.net/main-qimg-df9962525250822ee29b2e15ad683b2d-lq" alt="bg left:40% 100%" /></p>
+<ul>
+  <li>$\mathcal V$: atom type, $N = 6$
+    <ul>
+      <li>$x_1 = (1, 0, 0, 0, 0, 0) \in \mathbb R^6$</li>
+      <li>$x_2 = (0, 0, 0, 0, 0, 1) \in \mathbb R^6$</li>
+      <li>$x_3 = (1, 0, 0, 0, 0, 0) \in \mathbb R^6$</li>
+    </ul>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$\mathcal E$: bond type, $</td>
+          <td>\mathcal E</td>
+          <td>= 5$</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>$e_{12} = (1, 0) \in \mathbb R^2$</li>
+      <li>$e_{23} = (1, 0) \in \mathbb R^3$</li>
+      <li>$e_{25} = (0, 1) \in \mathbb R^2$
+        <blockquote>
+          <p>$e_{ij} = e_{ji}$
+cr. <a href="https://www.quora.com/How-is-the-structural-formula-for-C2H4-determined">Img.1</a></p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h2 id="graph-structure-example-1-1">Graph structure (example 1)</h2>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Ethylene-CRC-MW-3D-balls.png" alt="bg left:40% 100%" /></p>
+<ul>
+  <li>$\mathcal V$: atom type \&amp; coord, $N = 6$
+    <ul>
+      <li>$x_1 = (1, 0, 0, 0, 0, 0, 0, 0.92, 1.23) \in \mathbb R^9$</li>
+      <li>$x_2 = (0, 0, 0, 0, 0, 1, 0, 0, 0.67) \in \mathbb R^9$</li>
+      <li>$x_3 = (1, 0, 0, 0, 0, 0, 0, -0.92, 1.23) \in \mathbb R^9$</li>
+    </ul>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$\mathcal E$: bond type \&amp; direc, $</td>
+          <td>\mathcal E</td>
+          <td>= 5$</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>$e_{12} = (1, 0, 0, -0.92, -0.56) \in \mathbb R^5$</li>
+      <li>$e_{23} = (1, 0, -0.92, 0.56) \in \mathbb R^5$
+        <blockquote>
+          <p>$e_{ij} \neq e_{ji}$
+cr. <a href="https://en.m.wikipedia.org/wiki/File:Ethylene-CRC-MW-3D-balls.png">Img.1</a></p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h2 id="more-graph-representations">More Graph Representations</h2>
+<h3 id="adjacency-matrix">Adjacency Matrix</h3>
+<p><img src="https://mathworld.wolfram.com/images/eps-svg/AdjacencyMatrix_1002.svg" alt="bg left:40% 100%" /></p>
+<ul>
+  <li>Undirectional graph: $\mathbf A = \mathbf A^\top$</li>
+  <li>$e_{ii}$: self loop, might or might not be useful</li>
+</ul>
+
+<h3 id="degree-of-a-node">Degree of a node</h3>
+<ul>
+  <li>$\mathrm{deg}(x_i) = #$number of neighborhoods</li>
+</ul>
+
+<h3 id="subgraph-advanced">Subgraph (Advanced)</h3>
+<ul>
+  <li>Some node in the graph can be a sub-graph
+    <ul>
+      <li>e.g. functional group (CH3-, COOH-, …)</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <h2 id="cr-img1-read-more-laplacian-embedding">cr. <a href="https://mathworld.wolfram.com/AdjacencyMatrix.html"><em>Img.1</em></a>, read more: <a href="https://en.wikipedia.org/wiki/Laplacian_matrix">Laplacian Embedding</a></h2>
+</blockquote>
+
+<h2 id="graph-neural-networks-1">Graph Neural Networks</h2>
+<p><img src="https://miro.medium.com/v2/resize:fit:1050/format:webp/1*9wVED75kwm0umBzyZOBq-Q.png" alt="bg left:40% 100%" /></p>
+
+<ul>
+  <li>Function $f(\cdot)$ taking <strong>Graph</strong> $\mathcal G$ as input</li>
+  <li>Output $f(\mathcal G)$ can be …
+    <ul>
+      <li>A graph of a same structure $\mathcal G’$
+        <ul>
+          <li>Recommendations for each user</li>
+          <li>Energy for each atom</li>
+        </ul>
+      </li>
+      <li>A scalar …
+        <ul>
+          <li>Toxicity of a molecule ($y \in \mathbb {0, 1}$)</li>
+          <li>Conformation energy ($y \in \mathbb R$)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>cr. <a href="https://miro.medium.com/v2/resize:fit:1050/format:webp/1*9wVED75kwm0umBzyZOBq-Q.png"><em>Img.1</em></a></p>
+</blockquote>
+
+<hr />
+<h2 id="graph-neural-networks-message-passing--aggregation">Graph Neural Networks: Message Passing \&amp; aggregation</h2>
+
+<ul>
+  <li>Message from neighbor $j$ to $i$: $f(x_i, x_j, e_{ij})$</li>
+  <li>Aggregate the message from all neighbors
+\(x_i^{l+1} = x_i^l + \sum_{j \in \mathcal N(i)}f(x_i^{l+1}, x_j^{l+1}, e_{ij}^{l+1})\)</li>
+  <li>$f(x_i, x_j, e_{ij})$: trainable neural networks (usually MLP)</li>
+  <li>In the notation of adjacency matrix: $x_i^{l+1} = x_i^l + \mathbf A \mathbf f(x_i, \cdots, e_{i\cdots}^{l+1})$</li>
+  <li>$l$: number of layer in NN</li>
+  <li>Scalar output: $y = \sum_i x_i^L$</li>
+</ul>
+
+<hr />
+<h3 id="example-i-graph-convolutional-networks-gcn-1">Example I: Graph Convolutional Networks (GCN (1))</h3>
+
+<ul>
+  <li>Message from neighbor $j$ to $i$: ($\sigma$: activation function, $W$: trainable parameter) 
+\(f(x_i, x_j, e_{ij}) = \sigma(Wx_j)\)</li>
+  <li>Update layer from aggregation
+\(x_i^{l+1} = x_i^l + \frac{1}{\sqrt{\text{deg}(i)}}\sum_{j \in \mathcal N(i)}\sigma(Wx_j^{l})\)</li>
+</ul>
+
+<blockquote>
+  <p>(1): https://arxiv.org/pdf/1609.02907v4</p>
+</blockquote>
+
+<hr />
+<h3 id="example-ii-graph-attention-transformers-gat-gtn-2">Example II: Graph Attention Transformers (GAT, GTN (2))</h3>
+<ul>
+  <li>Message from neighborhoods: attention and values
+\(\begin{align}
+\mathrm{attn}(x_i, x_j, e_{ij}) &amp;= \langle Qx_i, Kx_j\rangle\\
+f(x_i, x_j, e_{ij}) &amp;= Vx_j
+\end{align}\)</li>
+  <li>Aggregate the information weighted by attnetion 
+\(x_i^{l+1} = \sum_{j \in \mathcal N_i} \mathrm{softmax}(\mathrm{attn}(x_i, x_j, e_{ij})) \cdot f(x_i, x_j, e_{ij})\)</li>
+  <li>Intuition: estimate the attention from different nodes.</li>
+</ul>
+
+<blockquote>
+  <p>(2): https://arxiv.org/abs/1911.06455</p>
+</blockquote>
+
+<hr />
+<h2 id="graph-neural-networks-libraries">Graph Neural Networks Libraries</h2>
+
+<ul>
+  <li>Graph Neural Networks
+    <ul>
+      <li>Pytorch Geometrics (PyG) (https://pytorch-geometric.readthedocs.io/en/latest/)</li>
+      <li>Deep Graph Library (DGL) (https://www.dgl.ai)</li>
+    </ul>
+  </li>
+  <li>Handling the graph structure
+    <ul>
+      <li>NetworkX (https://networkx.org)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h1 id="diffusion-processes">Diffusion Processes</h1>
+
+<h2 id="generative-model">Generative model</h2>
+<ul>
+  <li>Goal of the <strong>generative model</strong>: learn and sample from the distribution $\mathbb P(x)$.
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>With label: $\mathbb P(x</td>
+              <td>y)$</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+  <li>Prior work: Generative adversarial network <a href="https://arxiv.org/abs/1406.2661">GAN</a>, Variational autoencoder <a href="https://arxiv.org/abs/1906.02691">VAE</a>, etc.</li>
+</ul>
+
+<p>Compare with <strong>discrimative model</strong></p>
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Goal of discrimative model: discrimate different class of data $\mathbb P(y</td>
+          <td>x)$.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Examples: image classification (<a href="https://arxiv.org/abs/1409.1556">VGG</a>, <a href="https://arxiv.org/abs/1512.03385">ResNet</a>), languauage classification, etc..</li>
+</ul>
+
+<hr />
+<h2 id="diffusion-process---one-step">Diffusion Process - one step</h2>
+<p>Intuition: adding noise to the input (image) and denoise</p>
+<ul>
+  <li>Forward step: Generate $x_1 = x_0 + \varepsilon, \varepsilon \sim N(0, \sigma^2)$</li>
+  <li>Reverse step: Estimate $\varepsilon \approx \varepsilon_{\theta}(x_1)$ and generate $x_0 = x_1 - \varepsilon_{\theta}(x_1)$</li>
+</ul>
+
+<p><img src="https://yang-song.net/assets/img/score/perturb_vp.gif" alt="w:400pt" /> <img src="https://yang-song.net/assets/img/score/denoise_vp.gif" alt="w:400pt" /></p>
+
+<blockquote>
+  <p>cr. <a href="https://yang-song.net/assets/img/score/perturb_vp.gif"><em>Gif.1</em></a>, <a href="https://yang-song.net/assets/img/score/denoise_vp.gif"><em>Gif.2</em></a></p>
+</blockquote>
+
+<hr />
+<h2 id="diffusion-process---repeating-for-t-steps">Diffusion Process - Repeating for $T$ steps</h2>
+
+<ul>
+  <li>Forward process (Markovian):</li>
+</ul>
+
+\[x_1 \sim \mathbb P(\cdot | x_0), x_2 \sim \mathbb P(\cdot | x_1), \cdots, x_T \sim \mathbb P(x_{T-1})\]
+
+<blockquote>
+  <p>By Baysian rule, we not really need to sample it using the chain, but $x_t \sim \mathbb P_{t0}(\cdot| x_0)$</p>
+  <ul>
+    <li>e.g. $x_t \sim N(x_{t-1}, \sigma^2) \longrightarrow x_t \sim N(x_0, \sigma^2t)$</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>Reverse process <strong>(this is not formal, just for intuition!!)</strong>:
+\(x_{T-1} = x_T - \varepsilon_{\theta}(x_T, T), x_{T-2} = x_{T-1} - \varepsilon_{\theta}(x_{T-1}, T-1), \cdots, x_0 = x_1 - \varepsilon_{\theta}(x_1, 1)\)
+    <blockquote>
+      <p>We need to generate $x_0$ through this chain!</p>
+    </blockquote>
+  </li>
+  <li>Usually $\sigma$ is small that NN is not hard to learn</li>
+</ul>
+
+<hr />
+<h2 id="forward-process-assuming-sigma2x_0--1-by-normalization">Forward Process (Assuming $\sigma^2(x_0) = 1$ by normalization)</h2>
+<ul>
+  <li>VE-SDE: $x_t \sim N(x_{t-1}, \sigma^2)$, $x_t \sim N(x_0, \sigma^2t)$, $x_t \sim N(\mathbb E(x_0), \sigma^2(x_0) + \sigma^2 t)$
+    <ul>
+      <li>Variance-<strong>Exploded</strong></li>
+    </ul>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>VP-SDE: $x_t \sim N(\mu_{t</td>
+          <td>t-1} x_{t-1}, \sigma_{t</td>
+          <td>t-1}^2)$, $\sigma^2(x_t) = \sigma_{t</td>
+          <td>t-1}^2 + \mu_{t</td>
+          <td>t-1}^2 \sigma^2(x_{t-1})$</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>Variance-<strong>Preserved</strong>: $\mu_{t</td>
+              <td>t - 1}^2 + \sigma^2_{t</td>
+              <td>t - 1} = 1$, $\mu_t^2 + \sigma^2_t = 1$, $x_t = N(\mu_t x_0, \sigma^2_t)$.</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>$T \rightarrow \infty, \mu_t \rightarrow 0, \sigma_t \rightarrow 1, x_T \rightarrow N(0, 1)$ // we start reverse from here!</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="training-objective">Training objective:</h2>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Predict noise using noisy data: $\varepsilon_t = x_t - \mu_t x_0$: $\mathcal L = \mathbb E_{t, x_0, x_t</td>
+          <td>x_0}|\varepsilon_{\theta}(x_t, t) - \varepsilon_t|_2^2$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Reweight for better training $\mathcal L = \mathbb E_{t, x_0, x_t | x_0}|\varepsilon’_{\theta}(x_t, t) - \varepsilon_t / \sigma_t|_2^2$ ($\varepsilon_t / \sigma_t \sim N(0, 1)!$)
+    <blockquote>
+      <p>Note that $\varepsilon’_{\theta}(\cdot, t) \approx \varepsilon(\cdot, t) \sigma_t$</p>
+    </blockquote>
+  </li>
+</ul>
+
+<hr />
+<h2 id="reverse-process">Reverse Process</h2>
+<p>What we know know:
+\(x_{t-1} \sim N(\mu_{t-1} x_0, \sigma_{t-1}^2), \bar x_0 \approx x_t - \varepsilon_{\theta}(x_t, t) = x_t - \varepsilon'_{\theta}(x_t, t)\sigma_t\)</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Sample $x_{t-1} \sim N(\mu_{t-1} \bar x_0, \sigma^2_{t</td>
+      <td>t-1})$ ($x_t</td>
+      <td>x_{t-1} = N(\mu_tx_{t-1}, \sigma^2_{t</td>
+      <td>t-1})$)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>More justification…
+\(\mathbb P(x_{t-1} | x_t) = \sum_{\bar x_0}  \mathbb P(x_{t-1} | x_t, \bar x_0)\mathbb P(\bar x_0 | x_t)\)
+\(\mathbb P(x_{t-1} | x_t, x_0) \propto \mathbb P(x_{t-1} | x_0)\mathbb P(x_t | x_{t-1}) = N(\cdot, (\sigma_{t-1}^{-2} + \mu_{t | t - 1}^2\sigma_t^2)^{-1})\)</p>
+
+<blockquote>
+  <p>Readmore: Algorithm 1, 2 in <a href="https://arxiv.org/pdf/2006.11239">DDPM</a>. <a href="https://proceedings.neurips.cc/paper/2021/file/958c530554f78bcd8e97125b70e6973d-Paper.pdf">D3PM</a></p>
+</blockquote>
+
+<hr />
+<h2 id="why-diffusion-model-works-for-science-people">Why diffusion model works (for science people..)</h2>
+
+<ul>
+  <li>Langevin dynamics: $M\ddot X(t) = -\nabla U(X(t)) -\zeta \dot X(t) + \sqrt{2\zeta kT}R(t)$</li>
+  <li>
+    <p>Overdamped regime: $M \ll 1$: $\dot X(t) = -\zeta^{-1}\nabla U(X(t)) + \sqrt{2 kT / \zeta}R(t)$</p>
+  </li>
+  <li>Equilibrium Boltzmann distribution 
+\(\begin{align}
+\mathbb P(X) &amp;=  \exp(-U(X) / kT) / \int_{X}\exp(-U(X) / kT) \mathrm dx\\
+\log \mathbb P(X) &amp;= -U(X) / kT - \log \int_{X}\exp(-U(X) / kT) \mathrm dx\\
+\nabla_X \log \mathbb P(X) &amp;= - \nabla_X U(X) / kT
+\end{align}\)</li>
+</ul>
+
+<p>If we let $D = kT / \zeta$ then the overdamped Langevin becomes…
+\(\dot X(t) = -D \nabla_X \log \mathbb P(X) + \sqrt{2D}R(t)\)</p>
+
+<hr />
+<h2 id="now-the-same-again-with-statistics--ml-">Now the same again with statistics / ML …</h2>
+<p>\(\dot X(t) = -D \nabla_X \log \mathbb P(X) + \sqrt{2D}R(t) \Rightarrow X \sim \mathbb P(X)\)</p>
+<ul>
+  <li>$D$: learning rate (think of GD: $\dot X(t) = -D \nabla f(x)$)</li>
+  <li>$\nabla_X \log \mathbb P(X)$: <strong>score function</strong></li>
+  <li>How to learn score function? (score matching)
+    <ul>
+      <li>$\log \mathbb P(X)$ is hard to learn (think of learning $U(X)$, and $F(X) = \nabla U(X)$</li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>$\nabla \log \mathbb P(X) = \mathbb E_{X_0</td>
+              <td>X} \nabla \log \mathbb P(X</td>
+              <td>X_0)$, make $\nabla \log \mathbb P(X</td>
+              <td>X_0)$ easy to calculate..</td>
+            </tr>
+            <tr>
+              <td>$$\mathcal L = \mathbb E_{X_0, X</td>
+              <td>X_0} |f(X) - \nabla \log \mathbb P(X</td>
+              <td>X_0)|_2^2$$</td>
+              <td> </td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>What if $\mathbb P(X</td>
+              <td>X_0) = N(\mu X_0, \sigma^2) \propto \exp(-0.5 (X - \mu X_0)^2/ \sigma^{2})$?</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>$\nabla \log \mathbb P(X | X_0) = (X - \mu X_0) / \sigma^2 = -\varepsilon / \sigma^2$!!
+        <blockquote>
+          <p>$\mathbb P(X)$ is not the original data distribution. It is the distribution of $X$ given the $X_0$ is from the data distribution…</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h2 id="from-mathbb-px-to-mathbb-px_0">From $\mathbb P(X)$ to $\mathbb P(X_0)$</h2>
+<p><img src="https://yang-song.net/assets/img/score/single_noise.jpg" alt="h:300pt" /></p>
+
+<p>Forward process: $\mathrm dX = -f_tX\mathrm dt + g_t\mathrm d B$: $\mathrm dB$: Brownian motion</p>
+
+<blockquote>
+  <p>cr. <a href="(https://yang-song.net/assets/img/score/single_noise.jpg)"><em>Img.1</em></a></p>
+</blockquote>
+
+<hr />
+<h2 id="reverse-process-in-sde">Reverse process in SDE</h2>
+<blockquote>
+  <p>$\mathrm dX = -f_tX\mathrm dt + g_t\mathrm d B$: $\mathrm dB$: Brownian motion $\approx N(0, \mathrm dt)$, $t: 0 \rightarrow 1$</p>
+</blockquote>
+
+<p>Reverse process for recovering: $\mathrm dX = [-f_tX - g^2_t\nabla \log \mathbb P_t(x)]\mathrm dt + \mathrm d\bar B$:</p>
+<ul>
+  <li>$\mathrm d\bar B$: reverse brownian motion</li>
+  <li>Matching the score function and solve the SDE ($t: 1 \rightarrow 0$)
+<img src="https://yang-song.net/assets/img/score/sde_schematic.jpg" alt="h:250pt" /></li>
+</ul>
+
+<blockquote>
+  <p>cr. <a href="https://yang-song.net/assets/img/score/sde_schematic.jpg"><em>Img.1</em></a></p>
+</blockquote>
+
+<hr />
+<h2 id="conditional-generation-on-information-c">Conditional generation on information $c$</h2>
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Most naive one: train $\mathbb P(\cdot</td>
+          <td>c)$ seperately for each $c$, wait NN for generalization</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Classifier-guidance: Use a discriminative model predicting $\mathbb P(c</td>
+          <td>x, t)$</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>Seeking to generate $\mathbb Q(x) \propto \mathbb P(x)P(c</td>
+              <td>x, t)^{\gamma}$ ($\gamma$: generation strength)</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>In each of the generation step: let $\nabla \log \mathbb Q(x) = \nabla \log \mathbb P(x) + \nabla P(c</td>
+              <td>x, t)$</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>Make $\mathbb Q(x)$ more likely to be predicted as $P(c</td>
+              <td>x, t)$</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://arxiv.org/abs/2207.12598">Classifier-free guidance</a>
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>Approximate $P(c</td>
+              <td>x, t) \propto \mathbb P(x</td>
+              <td>c) \mathbb P(X)$, generating by</td>
+            </tr>
+            <tr>
+              <td>$$\nabla \log \mathbb Q(x) = (1 - \gamma)\nabla \log \mathbb P(x) + \gamma \log \mathbb P(x</td>
+              <td>c)$$</td>
+              <td> </td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>Do not require the classifier, suitable for image input, language prompt, etc..</li>
+    </ul>
+  </li>
+  <li>More general guidance: <a href="https://arxiv.org/abs/2304.12824">1</a> seeking for $\mathbb Q(x) \propto \mathbb P(x)\exp(-\mathcal E(x))$</li>
+</ul>
+
+<hr />
+<h2 id="blog--papers">Blog / papers</h2>
+<ul>
+  <li>https://yang-song.net/assets/img/score/sde_schematic.jpg</li>
+  <li>https://arxiv.org/abs/2006.11239</li>
+  <li>https://arxiv.org/abs/2011.13456
+    <h2 id="advanced-topics">Advanced topics</h2>
+  </li>
+  <li><a href="https://arxiv.org/pdf/2210.02747">Flow maching</a></li>
+  <li>Equivariant generation for 3D structure <a href="https://arxiv.org/abs/2203.17003">(1)</a> <a href="https://arxiv.org/abs/2204.05249">(2)</a></li>
+  <li>Physics of flow matching, diffusion model and how to accelerate</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=https://web.cs.ucla.edu/~weightzero/talks/GNN-Diffusion-Chem" class="btn btn--twitter" title="Share on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://web.cs.ucla.edu/~weightzero/talks/GNN-Diffusion-Chem" class="btn btn--facebook" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://web.cs.ucla.edu/~weightzero/talks/GNN-Diffusion-Chem" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<a href="https://web.cs.ucla.edu/~weightzero/sitemap/">Sitemap</a>
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/ZeroWeight"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="https://web.cs.ucla.edu/~weightzero/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Weitong Zhang. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/academicpages/academicpages.github.io">AcademicPages</a>, a fork of <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+    <aside class="sidebar__top">
+      <a href="#site-nav"> <i class="fas fa-angle-double-up fa-2x"></i></a>
+    </aside>
+    <script src="https://web.cs.ucla.edu/~weightzero/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-176072819-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+

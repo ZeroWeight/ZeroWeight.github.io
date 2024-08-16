@@ -1,0 +1,37 @@
+\documentclass[letterpaper,11pt]{article}
+\usepackage[style=alphabetic,url=false,doi=false,maxbibnames=99,sorting=ydnt]{biblatex}
+\bibliography{papers}
+
+\def\theme{MidnightBlue}
+
+\usepackage{simplecv}
+
+\boldname{Zhang}{Weitong}{W.}
+
+\begin{document}
+
+% Heading
+\headinginline{Weitong Zhang}{
+    Email: \email{weitongz@unc.edu} \\ 
+    GitHub: \url{https://github.com/ZeroWeight} \\
+    Homepage: \url{https://web.cs.ucla.edu/~weightzero}
+}
+
+% Page One
+\section{Professional Experience}
+\outerlist{
+\entrybig
+{\textbf{University of North Carolina, Chapel Hill}}{Chapel Hill, NC, USA}
+{Tenure-Track Assistant Professor, School of Data Science and Society}{2024\textendash Current}
+}
+\import{sections/}{education.tex}
+\import{sections/}{interest.tex}
+\import{sections/}{projects.tex}
+\import{sections/}{awards.tex}
+\import{sections/}{experience.tex}
+\import{sections/}{teaching.tex}
+\import{sections/}{extracurricular.tex}
+\import{sections/}{skills.tex}
+\import{sections/}{publications.tex}
+
+\end{document}

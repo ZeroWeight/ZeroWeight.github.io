@@ -1,1 +1,1 @@
-Sitemap: https://web.cs.ucla.edu/~weightzero/sitemap.xml
+Sitemap: https://zeroweight.github.io/sitemap.xml

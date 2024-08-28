@@ -294,7 +294,7 @@
       <section class="page__content" itemprop="text">
         <h2 id="jekyll-scholar">Jekyll-scholar</h2>
 
-<p>I use Jekyll-scholar to maintain my publications. So everytime I’d like to update my publications, I export from google scholar as the bib file, put it to <code class="language-plaintext highlighter-rouge">publications.bib</code> in my CV. Then in the GitHub Actions, I use <code class="language-plaintext highlighter-rouge">cat CV/papers.bib &gt;&gt; _bibliography/references.bib</code>. The <code class="language-plaintext highlighter-rouge">_bibliography/references.bib</code> originally has the Jekyll header:</p>
+<p>I use Jekyll-scholar to maintain my publications. So every time I’d like to update my publications, I export from google scholar as the bib file, put it to <code class="language-plaintext highlighter-rouge">publications.bib</code> in my CV. Then in the GitHub Actions, I use <code class="language-plaintext highlighter-rouge">cat CV/papers.bib &gt;&gt; _bibliography/references.bib</code>. The <code class="language-plaintext highlighter-rouge">_bibliography/references.bib</code> originally has the Jekyll header:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
 ---
@@ -314,7 +314,7 @@ author_profile: true
 
 
 &lt;!--  --&gt;
-&lt;p&gt; &lt;sup&gt;*&lt;/sup&gt; means Equal Contirbution.&lt;/p&gt;
+&lt;p&gt; &lt;sup&gt;*&lt;/sup&gt; means Equal Contribution.&lt;/p&gt;
 
 &lt;ol class="bibliography"&gt;&lt;li&gt;&lt;!-- Change all equal contribution --&gt;
 
@@ -452,7 +452,7 @@ author_profile: true
 <h2 id="toolchain-in-2024">Toolchain in 2024</h2>
 <p>I use GitHub Actions to deploy this webpage directly to my local server, eliminating the need to compile locally. Now, we can simultaneously update the CV and homepage using Jekyll.</p>
 
-<p>Something interesting here is Overleaf has the connection with Github, so if I’d like to make some changes on the CV, I can only update the Overleaf project and then push to github. It will call the latex docker to complie it.</p>
+<p>Something interesting here is Overleaf has the connection with Github, so if I’d like to make some changes on the CV, I can only update the Overleaf project and then push to github. It will call the latex docker to compile it.</p>
 
 <p>Below are the GitHub Actions I use</p>
 

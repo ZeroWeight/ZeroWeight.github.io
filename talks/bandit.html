@@ -282,7 +282,259 @@
       <section class="page__content" itemprop="text">
         <h1 id="from-bayesian-optimization-to-bandits-and-rl">From Bayesian Optimization to Bandits and RL</h1>
 
+<blockquote>
+  <p>Weitong Zhang
+Prepared for Chong’s Lab @ 08-29-2024, UCLA
+—</p>
+</blockquote>
+
+<h2 id="starting-from-bayesian-optimization">Starting from Bayesian Optimization</h2>
+<ul>
+  <li>Objective: $\min_x f(x)$</li>
+  <li>We do not know $f(\cdot)$ in beginning
+    <ul>
+      <li>For each round, select an $x \in \mathbb R^d$ (Through the dragonfly package…)
+        <ul>
+          <li><strong>Exploration</strong>: College the data, acquisition</li>
+        </ul>
+      </li>
+      <li>Receive the <strong>Noisy</strong> observation $y \approx f(x)$ (Automated system)</li>
+      <li>Try to update the function approximation $\tilde f(\cdot)$ (Through the dragonfly package)
+        <ul>
+          <li><strong>Exploitation</strong>: Use the data</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Bayesian Optimization:
+    <ul>
+      <li>The formulation of $f(\cdot)$ is fixed (Gaussian Kernel)</li>
+      <li>The exploration strategy (selecting $x$) is fixed (Kernel TS)</li>
+    </ul>
+  </li>
+</ul>
+
 <hr />
+<p><img src="https://blogs.mathworks.com/images/loren/2016/multiarmedbandit.jpg" alt="bg left:30% 100%" /></p>
+
+<h2 id="a-more-general-formulation-bandits">A more general formulation: Bandits</h2>
+<ul>
+  <li>Objective: $\max_x r(x)$ (find the optimal arm)</li>
+  <li><strong>Exploration</strong>: College the data $(x, r)$</li>
+  <li><strong>Exploitation</strong>: Estimate the reward $r(\cdot)$</li>
+</ul>
+
+<h3 id="notations--metrics">Notations / Metrics:</h3>
+<ul>
+  <li>Optimal arm: $x^* = \arg\max_x r(x)$</li>
+  <li>Policy $\pi$: Select different $x$</li>
+  <li>Regret: $\text{Reg}(K) = \sum_k r(x^*) - r(x_k)$</li>
+  <li>Sample Complexity: $r(x^*) - r(x_k) \le \epsilon \forall k \ge K(\epsilon)$</li>
+</ul>
+
+<p><strong>Differences between regret and sample complexity?</strong></p>
+<blockquote>
+  <p>cr. <a href="https://blogs.mathworks.com/images/loren/2016/multiarmedbandit.jpg"><em>Img.1</em></a></p>
+</blockquote>
+
+<hr />
+<h2 id="goals-for-bandits">Goals for Bandits</h2>
+<ul>
+  <li>Regret minimization: $\min \text{Reg}(K) = \sum_k r(x^*) - r(x_k)$
+    <ul>
+      <li>$x_k$ selection: Exploration + Exploitation</li>
+    </ul>
+  </li>
+  <li>Pure exploration / Explore-then-commit
+    <ul>
+      <li>Explore the environment for $K(\epsilon)$ steps and commit an $\epsilon$-optimal policy</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="setting-of-functions">Setting of functions</h2>
+<ul>
+  <li>Multi-armed Bandits: $x \in {x_1, x_2, \cdots, x_n}$, $r(x) = {r_1, r_2, \cdots, r_n}$</li>
+  <li>Contextual Bandits: $x \in \mathbb R^d$ or $x \in \mathcal D \subset \mathbb R^d$ (feature of observation)
+    <ul>
+      <li>Linear Bandits: $r(x) = \langle \theta, x\rangle$</li>
+      <li>Kernel Bandits: $r(x) = \langle \theta, \phi(x)\rangle$ (similar with Bayesian Optimization)</li>
+      <li>Neural Networks / General function approximation $r_\theta(x)$.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h2 id="challenges-and-philosophies">Challenges and Philosophies</h2>
+<blockquote>
+  <p>Tradeoff between <strong>exploration</strong> and <strong>exploitation</strong></p>
+  <ul>
+    <li>Collected Data: $\mathcal D = {(x_1, 1), (x_1, 1.3), (x_1, 1), (x_2, 1)}$</li>
+    <li>$\tilde r(x_1) = 1.1, \tilde r(x_2) = 1$ (True reward: $r(x_1) = 1.1, r(x_2) = 1.2$)</li>
+    <li>Regret minimization: $\min \sum_k r(x^*) - r(x_k)$  (Should we always select $x_1$?)</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>Uncertainty quantification: $\sigma_1 = 1/\sqrt{3}, \sigma_2 = 1$</li>
+  <li>Leveraging the uncertainty:
+    <ul>
+      <li>Posterior Sampling: $r(x) \sim \mathcal N(\tilde r(x), \sigma(x))$:
+        <ul>
+          <li><strong>Bayesian Optimization</strong>, <strong>Thompson Sampling</strong></li>
+        </ul>
+      </li>
+      <li>Encourage exploration: $r(x) = \tilde r(x) + \beta \sigma(x)$
+        <ul>
+          <li><strong>Upper Confidence Bound (UCB)</strong>, <strong>Optimistic</strong></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h2 id="extended-settings-i----safety-and-robustness">Extended settings (I) -  Safety and Robustness</h2>
+
+<ul>
+  <li>Safety of bandit: $\max r(x) \text{ s.t. } c(x) \le C$
+    <ul>
+      <li>Preliminary solution: $\max r(x) - \lambda c(x)$</li>
+    </ul>
+  </li>
+  <li>Robust to model error: when $r(x)$ is different from function approximation $\tilde r(x)$
+    <ul>
+      <li>E.g. $\tilde r(x) = \langle w, x\rangle$, $r(x) = \langle w, x\rangle + \eta(x)$</li>
+      <li>Preliminary solution: Learn from large uncertainties</li>
+    </ul>
+  </li>
+  <li>Robust to adversarial attack: after select $x$, receive $r = r(x) + \eta(x) + \epsilon$
+    <ul>
+      <li>Difference from model error: $\eta(x)$ is selected afterwards</li>
+      <li>Preliminary solution: weighted by uncertainties / Mirror descent</li>
+    </ul>
+  </li>
+  <li>Non-stationary bandits: $r_k(x)$ is changing over time $k$
+    <ul>
+      <li>E.g. $r_k(x) = \langle w + \theta t, x\rangle$: slow drifting linear function</li>
+      <li>Preliminary solution: sliding window, only learn from $[k-T, k]$ time window</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h2 id="extended-settings-ii---different-feedbacks">Extended settings (II) - Different feedbacks</h2>
+<ul>
+  <li>Regular feedback: Receive $r = r(x) + \epsilon$, $\epsilon$: zero mean (sub)-Gaussian
+    <ul>
+      <li>Extension: $\epsilon$ follows some more general distribution (heavy tailed, etc.)</li>
+    </ul>
+  </li>
+  <li>Binary feedback: Receive $r \sim \text{Ber.}(r(x))$
+    <ul>
+      <li>E.g. Recommendation system, if a user click the recommendation</li>
+      <li>Preliminary solution: change the loss function to cross-entropy loss</li>
+    </ul>
+  </li>
+  <li>Dueling bandit: Select two arms (A) and (B), and receive the winner (better) one
+    <ul>
+      <li>E.g. Reinforcement Learning with Human Feedback</li>
+      <li>Preliminary solution: admit some model: $P(w_A) = \exp(r(A) - r(B))$</li>
+      <li>Extension: Ranking over several actions (A &gt; B &gt; C &gt; D) (rank aggregation)</li>
+    </ul>
+  </li>
+  <li>Partial Monitoring: Only receive feedback when the agent request
+    <ul>
+      <li>E.g. Request label for spam email from a human, otherwise no feedback</li>
+      <li>Preliminary solution: query when uncertainty is large</li>
+    </ul>
+  </li>
+  <li>No feedback (reward free, pure exploration): Collect data for future tasks / rewards</li>
+</ul>
+
+<hr />
+<h2 id="extended-settings-iii---multi-step-decision">Extended settings (III) - Multi-step decision</h2>
+<ul>
+  <li>Delayed feedback: reward $r_t$ will be received at $r_{t + T}$
+    <ul>
+      <li>E.g., Experiments taking longer time to finish</li>
+    </ul>
+  </li>
+  <li>Batched update: perform $B$ experiments at the same time and receive $r_t, \cdots, r_{t + B}$</li>
+  <li>Low switching: Explore the environment without changing too much policies
+    <ul>
+      <li>E.g. Changing the policy when the current exploration policy is not good enough</li>
+    </ul>
+  </li>
+  <li><strong>Reinforcement Learning</strong>:
+    <ul>
+      <li>Sequential decision making steps: $a_1, \cdots a_H$</li>
+      <li>Consider the cumulative reward function $V = \sum_{h=1}^H r_h(s_h, a_h)$</li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>Markov Decision Processes: $s_{h+1} \sim P(\cdot</td>
+              <td>s_h, a_h)$</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>Bandits: $s_{h+1} \sim \mu(\cdot)$ or fixed (ignored)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h2 id="extended-settings-iv---structured-data">Extended settings (IV) - Structured data</h2>
+<ul>
+  <li>Combinatorial Bandits:
+    <ul>
+      <li>Action $[a, b, c]$ where $a \in [A_1, A_2, \cdots], b \in [B_1, B_2, \cdots], c \in [C_1, C_2, \cdots]$</li>
+      <li>E.g., Different combination of substances</li>
+      <li>Semi-bandit Feedback (A): Reward for each substances</li>
+      <li>Bandit Feedback: Reward for all substances</li>
+    </ul>
+  </li>
+  <li>Graph structured data: Contexts are represented as a graph $\mathcal G$
+    <ul>
+      <li>E.g. social graph for recommendations</li>
+    </ul>
+  </li>
+  <li>Collaborative filtering: Recommend different users with different items
+    <ul>
+      <li>Heuristic: an item is good if <code class="language-plaintext highlighter-rouge">it is good</code> or <code class="language-plaintext highlighter-rouge">the specific user like it</code></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h2 id="rule-of-thumb-to-apply-the-bandit-algorithms-not-bo-only">Rule of thumb to apply the bandit algorithms (not BO only)</h2>
+<ol>
+  <li>Problem setting: what’s the action space (features) and the outcome (labels)?</li>
+  <li>How is the outcome automated / costly? Noise? What kind of outcome?</li>
+  <li>What’s the prior knowledge on the actions?
+    <ul>
+      <li>E.g. Which action is better? pre-prepared offline dataset?</li>
+    </ul>
+  </li>
+  <li>The knowledge on function approximations: Linear? Bayesian Optimization?
+    <ul>
+      <li>Simpler the better! Why we need to go beyond BO?</li>
+    </ul>
+  </li>
+  <li>How much <strong>exploration</strong> you need?
+    <ul>
+      <li>Not all automated tasks need to explore so seriously!!</li>
+    </ul>
+  </li>
+  <li>Goal of your algorithm: Purely explore or getting to something good?</li>
+</ol>
+
+<hr />
+<h1 id="thank-you">Thank you</h1>
 
         
       </section>

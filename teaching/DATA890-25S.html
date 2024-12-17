@@ -19,7 +19,7 @@
 
 
 
-<title>Fundamentals of Artificial Intelligence - Weitong Zhang</title>
+<title>Decision Making Systems and Reinforcement Learning - Weitong Zhang</title>
 
 
 
@@ -29,15 +29,15 @@
 
 <meta property="og:locale" content="en-US">
 <meta property="og:site_name" content="Weitong Zhang">
-<meta property="og:title" content="Fundamentals of Artificial Intelligence">
+<meta property="og:title" content="Decision Making Systems and Reinforcement Learning">
 
 
-  <link rel="canonical" href="https://zeroweight.github.io/teaching/CS161-23W">
-  <meta property="og:url" content="https://zeroweight.github.io/teaching/CS161-23W">
+  <link rel="canonical" href="https://zeroweight.github.io/teaching/DATA890-25S">
+  <meta property="og:url" content="https://zeroweight.github.io/teaching/DATA890-25S">
 
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="OverviewThis graduate-level course is designed for students with interests in machine learning, artificial intelligence, and statistical methodologies. Advanced undergraduate students are also encouraged to enroll. Sequential decision-making systems, especially those powered by reinforcement learning, are essential for the development of autonomous AI systems and a core application of modern machine learning.The course covers foundational theories and concepts in decision-making algorithms, with a focus on reinforcement learning (RL) techniques. Key topics include the principles of Markov Decision Processes (MDPs), Q-learning, and policy-based algorithms, along with hands-on analysis and exploration of their applications.">
 
 
 
@@ -263,21 +263,21 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Fundamentals of Artificial Intelligence">
-    <meta itemprop="description" content="">
+    <meta itemprop="headline" content="Decision Making Systems and Reinforcement Learning">
+    <meta itemprop="description" content="OverviewThis graduate-level course is designed for students with interests in machine learning, artificial intelligence, and statistical methodologies. Advanced undergraduate students are also encouraged to enroll. Sequential decision-making systems, especially those powered by reinforcement learning, are essential for the development of autonomous AI systems and a core application of modern machine learning.The course covers foundational theories and concepts in decision-making algorithms, with a focus on reinforcement learning (RL) techniques. Key topics include the principles of Markov Decision Processes (MDPs), Q-learning, and policy-based algorithms, along with hands-on analysis and exploration of their applications.">
     
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Fundamentals of Artificial Intelligence
+          <h1 class="page__title" itemprop="headline">Decision Making Systems and Reinforcement Learning
 </h1>
           
         
         
         
-          <p> CS 161, Dis 1C, 2023 Winter, <i>UCLA, Department of Computer Science</i> </p>
+          <p> DATA 890, 2025 Spring, <i>UNC-CH, School of Data Science and Society</i> </p>
         
         
              
@@ -287,87 +287,188 @@
       
 
       <section class="page__content" itemprop="text">
-        <!-- TOC -->
+        <h2 id="overview">Overview</h2>
+<p>This graduate-level course is designed for students with interests in machine learning, artificial intelligence, and statistical methodologies. Advanced undergraduate students are also encouraged to enroll. Sequential decision-making systems, especially those powered by reinforcement learning, are essential for the development of autonomous AI systems and a core application of modern machine learning.The course covers foundational theories and concepts in decision-making algorithms, with a focus on reinforcement learning (RL) techniques. Key topics include the principles of Markov Decision Processes (MDPs), Q-learning, and policy-based algorithms, along with hands-on analysis and exploration of their applications.</p>
 
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Calculus (MATH 522 or similar), Linear Algebra (MATH 347, 577 or similar), Probability Theory (MATH 535, 635 or similar), Python Programming (COMP 116 or similar), Machine Learning (COMP 562, 755 or similar)</p>
+
+<h2 id="textbook-optional">Textbook (optional)</h2>
 <ul>
-  <li><a href="#end-of-quarter-summarize">End of quarter summarize</a></li>
-  <li><a href="#discussion-slides">Discussion slides</a>
+  <li>Reinforcement Learning: An Introduction, by Andrew Barto and Richard S. Sutton, <a href="https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf">book link</a></li>
+  <li>Reinforcement Learning: Theory and Algorithms, by Alekh Agarwal et al. <a href="[https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf](https://rltheorybook.github.io/rltheorybook_AJKS.pdf)">book link</a></li>
+</ul>
+
+<h2 id="logistics">Logistics</h2>
+<!--University of California, Los Angeles  -->
+<ul>
+  <li>Time: <strong>Tuesday and Thursday 11:00AM - 12:15PM, 2025 Spring</strong></li>
+  <li>Location: <strong>ITS Manning 1101</strong></li>
+  <li>Instructor: <a href="http://zeroweight.github.io">Weitong Zhang</a>, <a href="mailto:weitongz_at_unc_dot_edu">Email</a></li>
+  <li>Office hours:
     <ul>
-      <li><a href="#week-1-discussion-slides">Week 1 discussion slides</a></li>
-      <li><a href="#week-2-discussion-slides">Week 2 discussion slides</a></li>
-      <li><a href="#week-3-discussion-cancelled-due-to-covid">Week 3 discussion cancelled due to COVID</a></li>
-      <li><a href="#week-4-discussion-slides">Week 4 discussion slides</a></li>
-      <li><a href="#week-5-discussion-slides-midterm-review">Week 5 discussion slides, midterm review</a></li>
-      <li><a href="#week-6-discussion-slides">Week 6 discussion slides</a></li>
-      <li><a href="#week-7-discussion-slides">Week 7 discussion slides</a></li>
-      <li><a href="#week-8-discussion-calcelled-due-to-personal-travel">Week 8 discussion calcelled due to personal travel</a></li>
-      <li><a href="#week-9-discussion-slides">Week 9 discussion slides</a></li>
-      <li><a href="#week-10-discussion-slides-final-review">Week 10 discussion slides, final review</a></li>
+      <li>After the lecture, 12:15PM - 13:00PM, Tuesday and Thursday</li>
+      <li>Additional office hours would be posted seperatly or by appointment</li>
     </ul>
   </li>
 </ul>
 
-<!-- /TOC -->
-<p>This is CS 161 Fundamentals of Artificial Intelligence by <a href="http://web.cs.ucla.edu/~qgu/">Prof. Quanquan Gu</a> and I serve as TA Discussion Session 1C (at Franz Hall 1178 from 2p to 3:50p)</p>
+<h2 id="grading-policy">Grading Policy</h2>
 
-<h2 id="end-of-quarter-summarize">End of quarter summarize</h2>
+<p>Grades will be computed based on the following factors:</p>
 
-<p>It’s my great pleasure to serve as TA in a physical located class after COVID. And this is also my first time working with students face-to-face instead of via online meeting softwares as Zoom. I spent a great effort working with professor and to fullfill my responsibility for this course. And there is many gain from this experience.</p>
-
-<p>With more communication with students, I’m getting to know their understanding of the knowledge and the feedback of the lecture. I also get to know how to work with different students and to better accommodate the CAE students, provide a fair and includsive education environment. I think all these experiences are beneficial.</p>
-
-<p>I hope I can get a good student evaluation in the end, and I would be more than happy to hear student’s constructive feedback.</p>
-
-<blockquote>
-  <p>At 12:37 AM, Mar 23, 2023, after finishing the last CAE student final exam.</p>
-</blockquote>
-
-<h2 id="discussion-slides">Discussion slides</h2>
-
-<p>I’ll put the discussion slides here but it might take several seconds to load.</p>
-
-<h3 id="week-1-discussion-slides">Week 1 discussion slides</h3>
-
-<div style="position:relative;width:100%;padding-top:75.00%;padding-bottom:48px"><iframe src="https://zeroweight.github.io/files/CS161-23W/CS161Week1/index.html" width="100%" height="100%" frameborder="0" style="position:absolute;top:0;left:0;" allowfullscreen="1" referrer="no-referrer" loading="lazy"></iframe></div>
-
-<h3 id="week-2-discussion-slides">Week 2 discussion slides</h3>
-
-<div style="position:relative;width:100%;padding-top:75.00%;padding-bottom:48px"><iframe src="https://zeroweight.github.io/files/CS161-23W/CS161Week2/index.html" width="100%" height="100%" frameborder="0" style="position:absolute;top:0;left:0;" allowfullscreen="1" referrer="no-referrer" loading="lazy"></iframe></div>
-
-<h3 id="week-3-discussion-cancelled-due-to-covid">Week 3 discussion (cancelled due to COVID)</h3>
-
-<h3 id="week-4-discussion-slides">Week 4 discussion slides</h3>
-
-<div style="position:relative;width:100%;padding-top:75.00%;padding-bottom:48px"><iframe src="https://zeroweight.github.io/files/CS161-23W/CS161Week4/index.html" width="100%" height="100%" frameborder="0" style="position:absolute;top:0;left:0;" allowfullscreen="1" referrer="no-referrer" loading="lazy"></iframe></div>
-
-<h3 id="week-5-discussion-slides-midterm-review">Week 5 discussion slides, midterm review</h3>
-
-<div style="position:relative;width:100%;padding-top:75.00%;padding-bottom:48px"><iframe src="https://zeroweight.github.io/files/CS161-23W/CS161Week5/index.html" width="100%" height="100%" frameborder="0" style="position:absolute;top:0;left:0;" allowfullscreen="1" referrer="no-referrer" loading="lazy"></iframe></div>
-
-<h3 id="week-6-discussion-slides">Week 6 discussion slides</h3>
-
-<div style="position:relative;width:100%;padding-top:75.00%;padding-bottom:48px"><iframe src="https://zeroweight.github.io/files/CS161-23W/CS161Week6/index.html" width="100%" height="100%" frameborder="0" style="position:absolute;top:0;left:0;" allowfullscreen="1" referrer="no-referrer" loading="lazy"></iframe></div>
-
-<h3 id="week-7-discussion-slides">Week 7 discussion slides</h3>
-
-<div style="position:relative;width:100%;padding-top:75.00%;padding-bottom:48px"><iframe src="https://zeroweight.github.io/files/CS161-23W/CS161Week7/index.html" width="100%" height="100%" frameborder="0" style="position:absolute;top:0;left:0;" allowfullscreen="1" referrer="no-referrer" loading="lazy"></iframe></div>
-
-<p>Errata</p>
 <ul>
-  <li>Forward chaining can only be used when KB only consists horn clauses</li>
-  <li>See pp. 35 in Lecture 8 for the definition of horn clauses (in short, disjunctions containing at most one positive)</li>
-  <li>Forward chaining is complete for horn KBs, in linear time</li>
-  <li>We don’t know what if KBs is not horn.</li>
+  <li>Attendence: 10%</li>
+  <li>Reading report: a one-page-around report on one (or two) paper(s) published in year 2023/2024/2025 on
+    <ul>
+      <li>Empirical Topics (10%)</li>
+      <li>Theoretical Topics (10%)</li>
+      <li>Advanced Topics / RL + GenAI (10%)</li>
+    </ul>
+  </li>
+  <li>Final Project (60%) (detailed ratio subject to change)
+    <ul>
+      <li>Completeness (30%)</li>
+      <li>Peer-reviewed Quality (30%)</li>
+    </ul>
+  </li>
 </ul>
 
-<h3 id="week-8-discussion-calcelled-due-to-personal-travel">Week 8 discussion calcelled due to personal travel</h3>
-<h3 id="week-9-discussion-slides">Week 9 discussion slides</h3>
+<h2 id="related-courses-optional">Related Courses (optional)</h2>
+<ul>
+  <li>UIUC, Statistical Reinforcement Learning, by Prof. Nan Jiang, <a href="https://nanjiang.cs.illinois.edu/cs598">course link</a></li>
+  <li>Princeton, Foundations of Reinforcement Learning, by Prof. Chi Jin, <a href="https://sites.google.com/view/cjin/teaching/ece524">course link</a></li>
+  <li>UC Berkeley, Deep Reinforcement Learning, by Prof. Sergey Levine, <a href="http://rail.eecs.berkeley.edu/deeprlcourse/">course link</a></li>
+  <li>Cornell, Foundations of Reinforcement Learning, by Prof. Wen Sun, <a href="https://wensun.github.io/CS6789.html">course link</a></li>
+</ul>
 
-<div style="position:relative;width:100%;padding-top:75.00%;padding-bottom:48px"><iframe src="https://zeroweight.github.io/files/CS161-23W/CS161Week9/index.html" width="100%" height="100%" frameborder="0" style="position:absolute;top:0;left:0;" allowfullscreen="1" referrer="no-referrer" loading="lazy"></iframe></div>
+<h2 id="schedule">Schedule</h2>
 
-<h3 id="week-10-discussion-slides-final-review">Week 10 discussion slides, final review</h3>
-
-<div style="position:relative;width:100%;padding-top:75.00%;padding-bottom:48px"><iframe src="https://zeroweight.github.io/files/CS161-23W/CS161Week10/index.html" width="100%" height="100%" frameborder="0" style="position:absolute;top:0;left:0;" allowfullscreen="1" referrer="no-referrer" loading="lazy"></iframe></div>
+<table>
+  <thead>
+    <tr>
+      <th>Dates (T, TH)</th>
+      <th>Tuesday</th>
+      <th>Thursday</th>
+      <th>Reading</th>
+      <th>Assignment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>01/06, 01/10</td>
+      <td>no class held</td>
+      <td>Overview, logistics, supervised behavior learning</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>01/14, 01/16</td>
+      <td>Markov Decision Processes and Planning in RL</td>
+      <td>Coding foundations, behavioral cloning</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>01/21, 01/23</td>
+      <td>Value Iteration and Value-based methods</td>
+      <td>Practical deep RL with Q-learning</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>01/28, 01/30</td>
+      <td>Policy Iteration and Policy Gradient Methods</td>
+      <td>Actor-Critic Algorithms</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>02/04, 02/06</td>
+      <td>Advanced Policy-based algorithms</td>
+      <td>Model-based RL, MPC and World Model</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>02/11, 02/13</td>
+      <td>Theoretical Foundation: Multi-arm bandits</td>
+      <td>Exploration and Value-Iteration in Tabular MDP</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>02/18, 02/20</td>
+      <td>Function Approximation, Linear Bandits</td>
+      <td>Least Square Value-Iteration in Linear MDPs (I)</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>02/25, 02/27</td>
+      <td>Least Square Value-Iteration in Linear MDPs  (II)</td>
+      <td>RL with General Function Approximation</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>03/04, 03/06</td>
+      <td>Offline RL: Distribution Shift and Pessimism</td>
+      <td>Offline RL algorithms: CQL, IQL and more</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>03/18, 03/20</td>
+      <td>Hybrid RL, safety and constraint in RL</td>
+      <td>Unsupervised RL and reward free exploration</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>03/25, 03/27</td>
+      <td>Game Theory, two-player zero-sum game</td>
+      <td>Multi-Agent, general sum game and federated RL</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>04/01, 04/03</td>
+      <td>Inverse RL and Reward Modeling</td>
+      <td>Introduction to LLM and Diffusion Models</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>04/08, 04/10</td>
+      <td>RL with Human Feedback; Alignment</td>
+      <td>RL with Sequence Models, In context RL</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>04/15, 04/17</td>
+      <td>RL with Diffusion Models</td>
+      <td>Well-being day - no class held</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>04/22, 04/24</td>
+      <td>Advanced Topics in RL / Guest Lectures</td>
+      <td>Afterwords, Challenges and Open Problems</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>04/29, 05/01</td>
+      <td>In-Class Final Presentation</td>
+      <td>Examination Days - no class held</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
         
       </section>
@@ -388,11 +489,11 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=https://zeroweight.github.io/teaching/CS161-23W" class="btn btn--twitter" title="Share on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=https://zeroweight.github.io/teaching/DATA890-25S" class="btn btn--twitter" title="Share on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://zeroweight.github.io/teaching/CS161-23W" class="btn btn--facebook" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://zeroweight.github.io/teaching/DATA890-25S" class="btn btn--facebook" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://zeroweight.github.io/teaching/CS161-23W" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://zeroweight.github.io/teaching/DATA890-25S" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
       
@@ -400,12 +501,11 @@
 
   <nav class="pagination">
     
-      <a href="https://zeroweight.github.io/teaching/CS161-22W" class="pagination--pager" title="Fundamentals of Artificial Intelligence
+      <a href="https://zeroweight.github.io/teaching/CS161-23W" class="pagination--pager" title="Fundamentals of Artificial Intelligence
 ">Previous</a>
     
     
-      <a href="https://zeroweight.github.io/teaching/DATA890-25S" class="pagination--pager" title="Decision Making Systems and Reinforcement Learning
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 

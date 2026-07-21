@@ -10,7 +10,7 @@
 \usepackage{enumitem}                       % List customization
 \usepackage{lastpage}                       % Page numbering
 \usepackage{fancyhdr}                       % Footers
-\usepackage[russian,english]{babel}         % Language styles
+\usepackage[english]{babel}         % Language styles
 \usepackage{graphicx}                       % Importing graphics
 \usepackage[export]{adjustbox}              % Aligning margins
 
@@ -62,11 +62,11 @@
 
 % Inline heading
 \newcommand{\headinginline}[2]{
-    \begin{minipage}[t]{0.45\textwidth}
+    \begin{minipage}[t]{0.40\textwidth}
     \vspace*{\fill}
     \Huge \textcolor{color-title}{#1}
     \end{minipage}
-    \begin{minipage}[t]{0.5\textwidth}
+    \begin{minipage}[t]{0.55\textwidth}
     \begin{flushright}
     #2
     \end{flushright}
@@ -148,3 +148,4 @@
   \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiven}} or test {\ifdefequal{\firstinit}{\namepartgiven}} ) and (test {\ifdefequal{\lastname}{\namepartfamily}} or test {\ifdefequal{\lastnameEq}{\namepartfamily}}) }
   {\mkbibbold{#1}}{#1}%
 }
+\usepackage[margin=1in]{geometry}
